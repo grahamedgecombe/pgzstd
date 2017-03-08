@@ -1,0 +1,4 @@
+comment = 'Zstandard compression'
+default_version = '1.0.0'
+module_pathname = '$libdir/zstd'
+relocatable = true

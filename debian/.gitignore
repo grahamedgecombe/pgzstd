@@ -1,0 +1,5 @@
+/debhelper-build-stamp
+/files
+/postgresql-*
+*.substvars
+*.log

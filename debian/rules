@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+include /usr/share/postgresql-common/pgxs_debian_control.mk
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	+pg_buildext build build-%v
+
+override_dh_auto_install:
+	+pg_buildext install build-%v postgresql-%v-zstd
+
+override_dh_auto_clean:
+	+pg_buildext clean build-%v
