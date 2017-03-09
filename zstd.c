@@ -85,7 +85,16 @@ Datum decompress(PG_FUNCTION_ARGS)
             elog(FATAL, "ZSTD_createDCtx failed");
     }
 
+    /*
+     * XXX this function returns 0 in two cases: if the decompressed size really
+     * is zero, or if there was an error finding the decompressed size. Future
+     * versions of zstd provide ZSTD_getFrameContentSize(), which distinguishes
+     * between zero length and an error. However, we're stuck with
+     * ZSTD_getDecompressedSize() for now and always assume zero means a
+     * decompressed size of zero.
+     */
     out_len = ZSTD_getDecompressedSize(VARDATA(in), in_len);
+
     out = palloc(out_len + VARHDRSZ);
 
     out_len = ZSTD_decompress_usingDict(dctx, VARDATA(out), out_len, VARDATA(in), in_len, dict, dict_len);
