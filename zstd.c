@@ -6,6 +6,10 @@
 PG_MODULE_MAGIC;
 #endif
 
+#ifndef PG_INT32_MAX
+#define PG_INT32_MAX 0x7fffffff
+#endif
+
 #define DEFAULT_COMPRESSION_LEVEL 3
 
 static ZSTD_CCtx *cctx;
