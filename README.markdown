@@ -37,6 +37,7 @@ Two functions are provided:
 |-----------------------------------------------------------------------------------------|-------------|
 | <code>zstd\_compress(*data* bytea [, *dictionary* bytea [, *level* integer ]])</code>   | `bytea`     |
 | <code>zstd\_decompress(*data* bytea [, *dictionary* bytea ])</code>                     | `bytea`     |
+| <code>zstd\_length(*data* bytea)</code>                                                 | `integer`   |
 
 `zstd_compress` compresses the provided `data` and returns a Zstandard stream. A
 preset `dictionary` may also be provided. The default compression `level` may
@@ -49,6 +50,8 @@ If you want to override the compression level without using a dictionary, set
 `zstd_decompress` decompresses the provided Zstandard stream in `data` and
 returns the uncompressed data. A preset `dictionary`, matching the dictionary
 used to compress the data, may also be provided.
+
+`zstd_length` returns the decompressed length of the provided Zstandard stream.
 
 ## Example
 
@@ -64,6 +67,12 @@ used to compress the data, may also be provided.
 		  convert_from
 	-------------------------
 	 hello hello hello hello
+	(1 row)
+
+	gpe=# SELECT zstd_length('\x28b52ffd2017450000000200291c6c1420');
+	 zstd_length
+	-------------
+			  23
 	(1 row)
 
 	gpe=#

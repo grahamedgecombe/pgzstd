@@ -13,6 +13,7 @@ static ZSTD_DCtx *dctx;
 
 Datum compress(PG_FUNCTION_ARGS);
 Datum decompress(PG_FUNCTION_ARGS);
+Datum length(PG_FUNCTION_ARGS);
 
 PG_FUNCTION_INFO_V1(compress);
 Datum compress(PG_FUNCTION_ARGS)
@@ -104,4 +105,24 @@ Datum decompress(PG_FUNCTION_ARGS)
 
     SET_VARSIZE(out, out_len + VARHDRSZ);
     PG_RETURN_BYTEA_P(out);
+}
+
+PG_FUNCTION_INFO_V1(length);
+Datum length(PG_FUNCTION_ARGS)
+{
+    bytea *in;
+    size_t in_len, out_len;
+
+    if (PG_ARGISNULL(0))
+        PG_RETURN_NULL();
+
+    in = PG_GETARG_BYTEA_P(0);
+    in_len = VARSIZE(in) - VARHDRSZ;
+
+    /* XXX see above */
+    out_len = ZSTD_getDecompressedSize(VARDATA(in), in_len);
+    if (out_len > PG_INT32_MAX)
+        elog(ERROR, "ZSTD_getDecompressedSize returned value greater than PG_INT32_MAX");
+
+    PG_RETURN_INT32((int32) out_len);
 }

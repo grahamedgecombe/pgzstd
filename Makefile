@@ -1,7 +1,7 @@
 MODULE_big = zstd
 EXTENSION = zstd
 OBJS = zstd.o
-DATA = zstd--1.0.0.sql
+DATA = zstd--1.0.0--1.1.0.sql zstd--1.1.0.sql
 
 SHLIB_LINK += -lzstd
 
