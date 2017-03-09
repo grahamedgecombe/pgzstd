@@ -31,7 +31,7 @@ repository.
 ## Usage
 
 Run `CREATE EXTENSION zstd` to install the extension in the current database.
-Two functions are provided:
+Three functions are provided:
 
 | Function                                                                                | Return Type |
 |-----------------------------------------------------------------------------------------|-------------|
