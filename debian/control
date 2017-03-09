@@ -13,7 +13,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.2
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 
 Package: postgresql-9.3-zstd
@@ -21,7 +21,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.3
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 
 Package: postgresql-9.4-zstd
@@ -29,7 +29,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.4
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 
 Package: postgresql-9.5-zstd
@@ -37,7 +37,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.5
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 
 Package: postgresql-9.6-zstd
@@ -45,6 +45,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.6
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 

@@ -3,7 +3,7 @@
 ## Introduction
 
 pgzstd is a PostgreSQL extension that provides functions for compressing and
-uncompressing [Zstandard][zstd] streams, with support for custom dictionaries.
+uncompressing [Zstandard][zstd] frames, with support for custom dictionaries.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ Two functions are provided:
 | <code>zstd\_decompress(*data* bytea [, *dictionary* bytea ])</code>                     | `bytea`     |
 | <code>zstd\_length(*data* bytea)</code>                                                 | `integer`   |
 
-`zstd_compress` compresses the provided `data` and returns a Zstandard stream. A
+`zstd_compress` compresses the provided `data` and returns a Zstandard frame. A
 preset `dictionary` may also be provided. The default compression `level` may
 also be overriden, valid values range from `1` (best speed) to `22` (best
 compression). The default level is `3`.
@@ -47,11 +47,11 @@ compression). The default level is `3`.
 If you want to override the compression level without using a dictionary, set
 `dictionary` to `NULL`.
 
-`zstd_decompress` decompresses the provided Zstandard stream in `data` and
+`zstd_decompress` decompresses the provided Zstandard frame in `data` and
 returns the uncompressed data. A preset `dictionary`, matching the dictionary
 used to compress the data, may also be provided.
 
-`zstd_length` returns the decompressed length of the provided Zstandard stream.
+`zstd_length` returns the decompressed length of the provided Zstandard frame.
 
 ## Example
 

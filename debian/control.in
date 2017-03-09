@@ -13,5 +13,5 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-PGVERSION
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard streams, with support for custom dictionaries and configuring the
+ Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
