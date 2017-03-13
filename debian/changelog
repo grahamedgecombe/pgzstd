@@ -1,3 +1,9 @@
+pgzstd (1.1.1) unstable; urgency=low
+
+  * Create and free ZSTD contexts in _PG_init and _PG_fini respectively
+
+ -- Graham Edgecombe <gpe@grahamedgecombe.com>  Mon, 13 Mar 2017 20:41:13 +0000
+
 pgzstd (1.1.0) unstable; urgency=low
 
   * Fix terminology (stream -> frame) in documentation
