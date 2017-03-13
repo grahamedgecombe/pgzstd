@@ -15,9 +15,31 @@ PG_MODULE_MAGIC;
 static ZSTD_CCtx *cctx;
 static ZSTD_DCtx *dctx;
 
+void _PG_init(void);
+void _PG_fini(void);
 Datum compress(PG_FUNCTION_ARGS);
 Datum decompress(PG_FUNCTION_ARGS);
 Datum length(PG_FUNCTION_ARGS);
+
+void _PG_init(void)
+{
+    cctx = ZSTD_createCCtx();
+    if (!cctx)
+        elog(FATAL, "ZSTD_createCCtx failed");
+
+    dctx = ZSTD_createDCtx();
+    if (!dctx)
+        elog(FATAL, "ZSTD_createDCtx failed");
+}
+
+void _PG_fini(void)
+{
+    if (cctx)
+        ZSTD_freeCCtx(cctx);
+
+    if (dctx)
+        ZSTD_freeDCtx(dctx);
+}
 
 PG_FUNCTION_INFO_V1(compress);
 Datum compress(PG_FUNCTION_ARGS)
@@ -40,13 +62,6 @@ Datum compress(PG_FUNCTION_ARGS)
         bytea *d = PG_GETARG_BYTEA_P(1);
         dict = VARDATA(d);
         dict_len = VARSIZE(d) - VARHDRSZ;
-    }
-
-    if (!cctx)
-    {
-        cctx = ZSTD_createCCtx();
-        if (!cctx)
-            elog(FATAL, "ZSTD_createCCtx failed");
     }
 
     out_len = ZSTD_compressBound(in_len);
@@ -81,13 +96,6 @@ Datum decompress(PG_FUNCTION_ARGS)
         bytea *d = PG_GETARG_BYTEA_P(1);
         dict = VARDATA(d);
         dict_len = VARSIZE(d) - VARHDRSZ;
-    }
-
-    if (!dctx)
-    {
-        dctx = ZSTD_createDCtx();
-        if (!dctx)
-            elog(FATAL, "ZSTD_createDCtx failed");
     }
 
     /*
