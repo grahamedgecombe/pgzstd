@@ -57,25 +57,25 @@ used to compress the data, may also be provided.
 
     gpe=# CREATE EXTENSION zstd;
     CREATE EXTENSION
-	gpe=# SELECT zstd_compress('hello hello hello hello', 'hello hello', 3);
-				zstd_compress
-	--------------------------------------
-	 \x28b52ffd2017450000000200291c6c1420
-	(1 row)
+    gpe=# SELECT zstd_compress('hello hello hello hello', 'hello hello', 3);
+                zstd_compress
+    --------------------------------------
+     \x28b52ffd2017450000000200291c6c1420
+    (1 row)
 
-	gpe=# SELECT convert_from(zstd_decompress('\x28b52ffd2017450000000200291c6c1420', 'hello hello'), 'utf-8');
-		  convert_from
-	-------------------------
-	 hello hello hello hello
-	(1 row)
+    gpe=# SELECT convert_from(zstd_decompress('\x28b52ffd2017450000000200291c6c1420', 'hello hello'), 'utf-8');
+          convert_from
+    -------------------------
+     hello hello hello hello
+    (1 row)
 
-	gpe=# SELECT zstd_length('\x28b52ffd2017450000000200291c6c1420');
-	 zstd_length
-	-------------
-			  23
-	(1 row)
+    gpe=# SELECT zstd_length('\x28b52ffd2017450000000200291c6c1420');
+     zstd_length
+    -------------
+              23
+    (1 row)
 
-	gpe=#
+    gpe=#
 
 ## License
 
