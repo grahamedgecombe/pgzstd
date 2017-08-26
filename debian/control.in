@@ -3,7 +3,7 @@ Section: database
 Priority: optional
 Maintainer: Graham Edgecombe <gpe@grahamedgecombe.com>
 Build-Depends: debhelper (>= 9), postgresql-server-dev-all, libzstd-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.8
 Homepage: https://www.grahamedgecombe.com/projects/pgzstd
 Vcs-Git: https://github.com/grahamedgecombe/pgzstd.git
 Vcs-Browser: https://github.com/grahamedgecombe/pgzstd
