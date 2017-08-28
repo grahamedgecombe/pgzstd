@@ -1,3 +1,11 @@
+pgzstd (1.1.1+deb9u1) stretch; urgency=low
+
+  * Rebuild against stretch
+  * Convert tabs to spaces in the README
+  * Bump Standards-Version
+
+ -- Graham Edgecombe <gpe@grahamedgecombe.com>  Mon, 28 Aug 2017 18:00:46 +0100
+
 pgzstd (1.1.1) unstable; urgency=low
 
   * Create and free ZSTD contexts in _PG_init and _PG_fini respectively
