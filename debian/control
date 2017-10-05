@@ -48,3 +48,11 @@ Description: Zstandard compression module for PostgreSQL
  Zstandard frames, with support for custom dictionaries and configuring the
  compression level.
 
+Package: postgresql-10-zstd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-10
+Description: Zstandard compression module for PostgreSQL
+ PostgreSQL extension providing functions for compressing and uncompressing
+ Zstandard frames, with support for custom dictionaries and configuring the
+ compression level.
+
