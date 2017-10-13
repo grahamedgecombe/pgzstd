@@ -52,6 +52,9 @@ returns the uncompressed data. A preset `dictionary`, matching the dictionary
 used to compress the data, may also be provided.
 
 `zstd_length` returns the decompressed length of the provided Zstandard frame.
+If `ZSTD_getFrameContentSize()` is available it returns `NULL` if the length is
+unknown. If unavailable, it isn't possible to distinguish the error, unknown
+decompressed length and zero decompressed length cases.
 
 ## Example
 

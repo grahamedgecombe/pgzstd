@@ -98,16 +98,15 @@ Datum decompress(PG_FUNCTION_ARGS)
         dict_len = VARSIZE(d) - VARHDRSZ;
     }
 
-    /*
-     * XXX this function returns 0 in two cases: if the decompressed size really
-     * is zero, or if there was an error finding the decompressed size. Future
-     * versions of zstd provide ZSTD_getFrameContentSize(), which distinguishes
-     * between zero length and an error. However, we're stuck with
-     * ZSTD_getDecompressedSize() for now and always assume zero means a
-     * decompressed size of zero.
-     */
+#ifdef ZSTD_CONTENTSIZE_UNKNOWN
+    out_len = ZSTD_getFrameContentSize(VARDATA(in), in_len);
+    if (out_len == ZSTD_CONTENTSIZE_UNKNOWN)
+        elog(ERROR, "ZSTD_getFrameContentSize returned unknown");
+    else if (out_len == ZSTD_CONTENTSIZE_ERROR)
+        elog(ERROR, "ZSTD_getFrameContentSize failed");
+#else
     out_len = ZSTD_getDecompressedSize(VARDATA(in), in_len);
-
+#endif
     out = palloc(out_len + VARHDRSZ);
 
     out_len = ZSTD_decompress_usingDict(dctx, VARDATA(out), out_len, VARDATA(in), in_len, dict, dict_len);
@@ -131,8 +130,15 @@ Datum length(PG_FUNCTION_ARGS)
     in = PG_GETARG_BYTEA_P(0);
     in_len = VARSIZE(in) - VARHDRSZ;
 
-    /* XXX see above */
+#ifdef ZSTD_CONTENTSIZE_UNKNOWN
+    out_len = ZSTD_getFrameContentSize(VARDATA(in), in_len);
+    if (out_len == ZSTD_CONTENTSIZE_UNKNOWN)
+        PG_RETURN_NULL();
+    else if (out_len == ZSTD_CONTENTSIZE_ERROR)
+        elog(ERROR, "ZSTD_getFrameContentSize failed");
+#else
     out_len = ZSTD_getDecompressedSize(VARDATA(in), in_len);
+#endif
     if (out_len > PG_INT32_MAX)
         elog(ERROR, "ZSTD_getDecompressedSize returned value greater than PG_INT32_MAX");
 
