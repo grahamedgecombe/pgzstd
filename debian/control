@@ -8,14 +8,6 @@ Homepage: https://www.grahamedgecombe.com/projects/pgzstd
 Vcs-Git: https://github.com/grahamedgecombe/pgzstd.git
 Vcs-Browser: https://github.com/grahamedgecombe/pgzstd
 
-Package: postgresql-9.2-zstd
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.2
-Description: Zstandard compression module for PostgreSQL
- PostgreSQL extension providing functions for compressing and uncompressing
- Zstandard frames, with support for custom dictionaries and configuring the
- compression level.
-
 Package: postgresql-9.3-zstd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-9.3
@@ -51,6 +43,14 @@ Description: Zstandard compression module for PostgreSQL
 Package: postgresql-10-zstd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-10
+Description: Zstandard compression module for PostgreSQL
+ PostgreSQL extension providing functions for compressing and uncompressing
+ Zstandard frames, with support for custom dictionaries and configuring the
+ compression level.
+
+Package: postgresql-11-zstd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-11
 Description: Zstandard compression module for PostgreSQL
  PostgreSQL extension providing functions for compressing and uncompressing
  Zstandard frames, with support for custom dictionaries and configuring the
